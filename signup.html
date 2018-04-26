@@ -9,6 +9,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/signupCredentials.js"></script>
 
 </head>
 <body >
@@ -39,16 +40,16 @@
 </nav>
 
 <div class="form-size">
-    <form action="#" method="post">
+    <form method="post">
         <div class="form-group ">
             <label for="username">Username</label>
-            <input type="username" class="form-control" id="username" name="username" placeholder="Username">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <a href="home.html"> <button type="button" onclick="getDetails()" class="btn btn-primary" >Sign Up</button></a>
 
     </form>
 </div>
