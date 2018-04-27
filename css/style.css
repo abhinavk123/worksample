@@ -12,5 +12,15 @@
 }
 
 #navbar{
-    right: 0px;
+    right: 0;
+}
+
+#innerbody{
+    background-color: #79938a;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: auto;
+    bottom: auto;
+
 }
