@@ -100,8 +100,9 @@ function updateContent() {
     }
     temp += '</ul>'+
         '</div>' +
-        '<div  class="col-sm-10"><h1 style="text-align:center">Question & Answer</h1>' +
-        '<div id ="chapterDetails">Hi</div>'+
+        '<div  class="col-sm-10 jumbotron" ><h1 class="display-6" style="text-align:center">Question & Answer</h1>' +
+            '<hr class="my-4">'+
+        '<div id ="chapterDetails" >Hi</div>'+
         '</div>' +
         '</div>';
 
