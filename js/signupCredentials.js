@@ -1,6 +1,6 @@
 var userDetails = [];
 var database;
-var prevChapter = [0,0,0];
+var prev = [0,0,0];
 var txt = '';
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function(){
@@ -124,15 +124,48 @@ function updateChapterQa(i,j,k) {
         displayContent += '<li>Q' + (l + 1) + ': ' + database.gradesList[i].subjectList[j].chapterList[k].questionList[l].question + '</li>' +
             '<p> Ans :' + database.gradesList[i].subjectList[j].chapterList[k].questionList[l].answer + '</p>';
     }
+    displayContent += '<button id ="showAddPanel" onclick="showAddPannel()" class="btn btn-primary">Add Question</button>';
+    displayContent += '<div id ="addQuesForm" style="visibility: hidden" ><form >'+
+        '<div  class="form-group ">'+
+            '<label for="question">Question</label>'+
+            '<br>'+
+            '<textarea id = "question" rows="2" cols="50" required></textarea>'+
+        '</div>'+
+        '<div class="form-group">'+
+            '<label for="answer">Answer</label>'+
+            '<br>'+
+           '<textarea id = answer rows="2" cols="50" required></textarea>'+
+        '</div>'+
+        '<button id = "addQandAnsBtn" onclick="addQandA()" type="button"  class="btn btn-primary">Add</button>'+
+    '</form></div>';
+
 
     document.getElementById('chapterDetails').innerHTML = displayContent;
-    document.getElementById('chapter'+prevChapter[0]+prevChapter[1]+prevChapter[2]).style.color = "#000000";
-    document.getElementById('chapter'+prevChapter[0]+prevChapter[1]+prevChapter[2]).style.fontStyle = "normal";
+    document.getElementById('chapter'+prev[0]+prev[1]+prev[2]).style.color = "#000000";
+    document.getElementById('chapter'+prev[0]+prev[1]+prev[2]).style.fontStyle = "normal";
     document.getElementById('chapter'+i+j+k).style.color = "#697eff";
     document.getElementById('chapter'+i+j+k).style.fontStyle = "italic";
 
-    prevChapter[0]=i;
-    prevChapter[1]=j;
-    prevChapter[2]=k;
+    prev[0]=i;
+    prev[1]=j;
+    prev[2]=k;
 
+}
+
+function showAddPannel() {
+
+    document.getElementById('showAddPanel').style.visibility = "hidden";
+    document.getElementById('addQuesForm').style.visibility = "visible";
+}
+
+function addQandA() {
+    var ques = document.getElementById('question').value;
+    var ans  = document.getElementById('answer').value;
+    var item = {};
+    item["question"] = ques;
+    item["answer"] = ans;
+    database.gradesList[prev[0]].subjectList[prev[1]].chapterList[prev[2]].questionList.push(item);
+    updateContent();
+    updateChapterQa(prev[0],prev[1],prev[2]);
+    
 }
