@@ -4,7 +4,7 @@ function getDetails() {
 
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-
+    item = {};
     item["username"] = username;
     item["password"] = password;
 
@@ -18,22 +18,21 @@ function getDetails() {
 function loginVerify() {
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-   // temp = userDetails[0];
-
-    if ( username == item.username)
+    temp = userDetails[0];
+    name = temp.username;
+    pass = temp.password;
+    if ( username == name)
     {
-        document.getElementById('msg').style.color="green";
-        document.getElementById('msg').innerHTML="sucess";
+        if( pass == password) {
+            window.alert("Login  Success");
+        }
+        else
+            window.alert("Wrong Password");
 
-        return true;
     }
     else
     {
-        document.getElementById('msg').style.color="red";
-        document.getElementById('msg').innerHTML="fail";
+        window.alert("Username does not Exist. Please SignUp");
 
-        return false;
     }
-
-
 }
