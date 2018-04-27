@@ -1,6 +1,6 @@
 var userDetails = [];
 var database;
-
+var prevChapter = [0,0,0];
 var txt = '';
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function(){
@@ -60,50 +60,78 @@ function loginVerify() {
 
 function onLogin() {
     updateContent();
+    updateChapterQa(0,0,0);
 }
 
 function updateContent() {
-     var prevCode = '<div class="row">' +
+
+    var prevCode = '<div class="row">' +
         '<div id ="content" class="col-sm-2">' +
-            '<h1><i> &nbsp; Content</i></h1>' +
-            '<ul id = "grade" style="list-style-type:disc">';
-            var i;
-            var temp = "";
-            for(i = 0; i< database.gradesList.length ; i++) {
+        '<h1><i> &nbsp; Content</i></h1>' +
+        '<ul id = "grade" style="list-style-type:disc">';
 
-                temp += '<li>' + database.gradesList[i].name;
-                var j = "";
-                temp += '<ul id = "subject'+i+'">';
-                var temp2 = "";
-                for (j = 0; j < database.gradesList[i].subjectList.length; j++) {
+    var i;
 
-                    temp2 += '<li>' + database.gradesList[i].subjectList[j].name +
-                        '<ul id = "chapter'+i+j+'">';
-                    var k;
-                    var temp3 = "";
-                    for (k = 0; k < database.gradesList[i].subjectList[j].chapterList.length; k++) {
-                        temp3 += '<li><a onclick="updateChapterQa(i,j,k)">' + database.gradesList[i].subjectList[j].chapterList[k].name + '</a></li>';
-                    }
-                    temp2 = temp2.concat(temp3);
-                    temp2 += '</ul>';
-                    temp2 += '</li>';
-                }
-                temp = temp.concat(temp2);
-                temp += '</ul>';
+    var temp = "";
 
-                temp += '</li>';
+    for(i = 0; i< database.gradesList.length ; i++) {
+
+        temp += '<li>' + database.gradesList[i].name;
+        var j = "";
+        temp += '<ul id = "subject'+i+'">';
+        var temp2 = "";
+        for (j = 0; j < database.gradesList[i].subjectList.length; j++) {
+
+            temp2 += '<li>' + database.gradesList[i].subjectList[j].name +
+                '<ul style="list-style-type:square" id = "chapters'+i+j+'">';
+            var k;
+            var temp3 = "";
+            for (k = 0; k < database.gradesList[i].subjectList[j].chapterList.length; k++) {
+                temp3 += '<li id="chapter'+i+j+k+'" class="btn btn-default" onclick="updateChapterQa('+i+','+j+','+k+')">' + database.gradesList[i].subjectList[j].chapterList[k].name + '</button></li>';
             }
-            temp += '</ul>'+
+            temp2 = temp2.concat(temp3);
+            temp2 += '</ul>';
+            temp2 += '</li>';
+        }
+        temp = temp.concat(temp2);
+        temp += '</ul>';
+
+        temp += '</li>';
+    }
+    temp += '</ul>'+
         '</div>' +
-        '<div id =chapterDetails" class="col-sm-10">.col-sm-4</div>' +
-    '</div>';
+        '<div  class="col-sm-10"><h1 style="text-align:center">Question & Answer</h1>' +
+        '<div id ="chapterDetails">Hi</div>'+
+        '</div>' +
+        '</div>';
+
     var myhtmlcode = prevCode.concat(temp);
+
     document.getElementById('innerbody').innerHTML=myhtmlcode;
-document.getElementById('innerbody').style.backgroundColor="#ffffff";
+    document.getElementById('innerbody').style.backgroundColor="#ffffff";
 
 }
 
 function updateChapterQa(i,j,k) {
-    document.getElementById('chapterDetails').innerHTML="Hello"+i+j+k;
+    console.log(i);
+
+    var displayContent ='<ul style="list-style-type: none">';
+
+    var l;
+
+    for(l=0;l<database.gradesList[i].subjectList[j].chapterList[k].questionList.length;l++) {
+        displayContent += '<li>Q' + (l + 1) + ': ' + database.gradesList[i].subjectList[j].chapterList[k].questionList[l].question + '</li>' +
+            '<p> Ans :' + database.gradesList[i].subjectList[j].chapterList[k].questionList[l].answer + '</p>';
+    }
+
+    document.getElementById('chapterDetails').innerHTML = displayContent;
+    document.getElementById('chapter'+prevChapter[0]+prevChapter[1]+prevChapter[2]).style.color = "#000000";
+    document.getElementById('chapter'+prevChapter[0]+prevChapter[1]+prevChapter[2]).style.fontStyle = "normal";
+    document.getElementById('chapter'+i+j+k).style.color = "#697eff";
+    document.getElementById('chapter'+i+j+k).style.fontStyle = "italic";
+
+    prevChapter[0]=i;
+    prevChapter[1]=j;
+    prevChapter[2]=k;
 
 }
