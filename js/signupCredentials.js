@@ -87,7 +87,7 @@ function updateContent() {
             var k;
             var temp3 = "";
             for (k = 0; k < database.gradesList[i].subjectList[j].chapterList.length; k++) {
-                temp3 += '<li id="chapter'+i+j+k+'" class="btn btn-default" onclick="updateChapterQa('+i+','+j+','+k+')">' + database.gradesList[i].subjectList[j].chapterList[k].name + '</button></li>';
+                temp3 += '<li id="chapter'+i+j+k+'"  onclick="updateChapterQa('+i+','+j+','+k+')">' + database.gradesList[i].subjectList[j].chapterList[k].name + '</li>';
             }
             temp2 = temp2.concat(temp3);
             temp2 += '</ul>';
