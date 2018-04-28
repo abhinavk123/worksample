@@ -13,14 +13,26 @@
 
 #navbar{
     right: 0;
+
 }
 
-#innerbody{
+.innercontent {
     background-color: #79938a;
-    position: fixed;
     width: 100%;
     height: 100%;
     top: auto;
     bottom: auto;
-
 }
+
+#chapterDetails{
+   overflow-y: scroll;
+    max-height: 410px;
+ max-width: inherit;
+}
+
+.myjumbo{
+    max-height:700px;
+    max-width: inherit;
+    margin-bottom: 0;
+}
+

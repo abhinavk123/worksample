@@ -100,9 +100,9 @@ function updateContent() {
     }
     temp += '</ul>'+
         '</div>' +
-        '<div  class="col-sm-10 jumbotron" ><h1 class="display-6" style="text-align:center">Question & Answer</h1>' +
+        '<div  class="col-sm-10 jumbotron myjumbo"><h1 class="display-6" style="text-align:center">Question & Answer</h1>' +
             '<hr class="my-4">'+
-        '<div id ="chapterDetails" >Hi</div>'+
+        '<div id ="chapterDetails" class="mycontent" style="overflow-y: scroll">Hi</div>'+
         '</div>' +
         '</div>';
 
