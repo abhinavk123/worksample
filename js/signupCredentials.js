@@ -18,6 +18,13 @@ function getDetails() {
 
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
+    if(username.length==0||password.length==0)
+    {
+
+            window.alert("Username and Password cannot be empty");
+            return false;
+
+    }
     item = {};
     item["username"] = username;
     item["password"] = password;
@@ -32,9 +39,8 @@ function getDetails() {
 function loginVerify() {
     if( userDetails.length == 0)
     {
-        //window.alert("User does not exists.Please Sign Up");
-        document.getElementById('innerbody').innerHTML="User does not exists.Please Sign Up";
-        document.getElementById('innerbody').style.backgroundColor="#ffffff";
+        window.alert("User does not exists.Please Sign Up");
+
     }
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
