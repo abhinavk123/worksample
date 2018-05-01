@@ -18,11 +18,13 @@ function getDetails() {
 
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
+
+
     if(username.length==0||password.length==0)
     {
 
-            window.alert("Username and Password cannot be empty");
-            return false;
+        window.alert("Username and Password cannot be empty");
+        return false;
 
     }
     item = {};
@@ -44,24 +46,31 @@ function loginVerify() {
     }
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-    temp = userDetails[0];
-    name = temp.username;
-    pass = temp.password;
-    if ( username == name)
+    var i;
+    for(i=0;i<userDetails.length;i++)
     {
-        if( pass == password) {
-            onLogin()
-            window.alert("Login  Success");
+        if(username == userDetails[i].username)
+        {
+            pass = userDetails[i].password;
+
+            if( pass == password) {
+                document.getElementById('logout').style.visibility = "visible";
+                onLogin();
+                window.alert("Login  Success");
+
+                return true;
+            }
+            else {
+                window.alert("Wrong Password");
+                return false;
+            }
+
+
+
+
         }
-        else
-            window.alert("Wrong Password");
-
     }
-    else
-    {
-        window.alert("Username does not Exist. Please SignUp");
-
-    }
+    window.alert("Username does not Exist. Please SignUp");
 }
 
 function onLogin() {
@@ -107,7 +116,7 @@ function updateContent() {
     temp += '</ul>'+
         '</div>' +
         '<div  class="col-sm-10 jumbotron myjumbo"><h1 class="display-6" style="text-align:center">Question & Answer</h1>' +
-            '<hr class="my-4">'+
+        '<hr class="my-4">'+
         '<div id ="chapterDetails" class="mycontent" style="overflow-y: scroll">Hi</div>'+
         '</div>' +
         '</div>';
@@ -133,17 +142,17 @@ function updateChapterQa(i,j,k) {
     displayContent += '<button id ="showAddPanel" onclick="showAddPannel()" class="btn btn-primary">Add Question</button>';
     displayContent += '<div id ="addQuesForm" style="visibility: hidden" ><form >'+
         '<div  class="form-group ">'+
-            '<label for="question">Question</label>'+
-            '<br>'+
-            '<textarea id = "question" rows="2" cols="50" required></textarea>'+
+        '<label for="question">Question</label>'+
+        '<br>'+
+        '<textarea id = "question" rows="2" cols="50" required></textarea>'+
         '</div>'+
         '<div class="form-group">'+
-            '<label for="answer">Answer</label>'+
-            '<br>'+
-           '<textarea id = answer rows="2" cols="50" required></textarea>'+
+        '<label for="answer">Answer</label>'+
+        '<br>'+
+        '<textarea id = answer rows="2" cols="50" required></textarea>'+
         '</div>'+
         '<button id = "addQandAnsBtn" onclick="addQandA()" type="button"  class="btn btn-primary">Add</button>'+
-    '</form></div>';
+        '</form></div>';
 
 
     document.getElementById('chapterDetails').innerHTML = displayContent;
@@ -167,11 +176,39 @@ function showAddPannel() {
 function addQandA() {
     var ques = document.getElementById('question').value;
     var ans  = document.getElementById('answer').value;
+    if( ques == 0 || ans ==0)
+    {
+        window.alert('Both fields cannot be empty');
+        return false;
+    }
     var item = {};
     item["question"] = ques;
     item["answer"] = ans;
     database.gradesList[prev[0]].subjectList[prev[1]].chapterList[prev[2]].questionList.push(item);
     updateContent();
     updateChapterQa(prev[0],prev[1],prev[2]);
-    
+
+}
+
+function onLogout() {
+    homePage='<div class="form-size">'+
+    '<form action="#" method="post">'+
+       ' <div class="form-group ">'+
+            '<label for="username">Username</label>'+
+            '<input type="text" class="form-control" id="username" name="username" placeholder="Username">'+
+        '</div>'+
+        '<div class="form-group">'+
+            '<label for="password">Password</label>'+
+            '<input type="password" class="form-control" id="password" name="password" placeholder="Password">'+
+
+        '</div>'+
+        '<div id="msg">'+
+
+        '</div>'+
+        '<button type="button" onclick="loginVerify()" class="btn btn-primary">Log In</button>'+
+        '<button type="button" onclick="getDetails()" class="btn btn-primary"> Sign Up</button>'+
+    '</form>'+
+'</div>'  ;
+    document.getElementById('innerbody').innerHTML=homePage;
+    document.getElementById('logout').style.visibility="hidden";
 }
